@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {{>header}}
+
+</head>
+
+{{>userheaders}}
+
+
+
+<body>
+
+
+    <!-- NAVIGATION -->
+
+    <!-- /NAVIGATION -->
+
+    <!-- BREADCRUMB -->
+
+    <!-- /BREADCRUMB -->
+
+    <!-- SECTION -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row" id="reload">
+                <div class="col-md-8 col-md">
+                    <table class="table mt-5">
+                        {{#if carterror}}
+                        <h2>Cart is empty</h2>
+
+
+                        {{else}}
+                        <thead>
+                            <tr>
+
+                                <th scope="col">Item</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Total Price</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+
+
+
+                            {{#each data}}
+
+
+                            <tr>
+
+                                <td> <img style="width:70px; height:70; "
+                                        src="/user/productimage/{{this.cartitem.images.[0]}}" alt=""></td>
+                                <td> {{this.cartitem.name}}</td>
+                                <td>{{this.cartitem.offerPrice}}</td>
+                                <td>
+                                    <button class="cart-item-count mr-3"
+                                        onclick="changeQnty('{{this._id}}','{{this.cartitem._id}}',-1)">-</button>
+                                    <span id="{{this.cartitem._id}}">{{this.qty}}</span>
+                                    <button class="cart-item-count mr-3"
+                                        onclick="changeQnty('{{this._id}}','{{this.cartitem._id}}',1)">+</button>
+
+                                </td>
+                                <td class="intotal"> {{this.total}}</td>
+                                <td>
+                                    <button class="btn btn-danger"
+                                        onclick="removebtn('{{this.cartitem._id}}')">remove</button>
+                                </td>
+
+
+                            </tr>
+
+                            {{/each}}
+                        </tbody>
+                        {{/if}}
+                    </table>
+
+
+
+                </div>
+
+                {{#if carterror}}
+                {{else}}
+
+                <div class="col-md-4 order-details">
+                    <div class="section-title text-center">
+                        <h3 class="title">Your Order</h3>
+                    </div>
+                    <div class="order-summary">
+                        <div class="order-col">
+                            <div><strong>PRODUCT</strong></div>
+                            <div><strong>TOTAL</strong></div>
+                        </div>
+
+                        <div class="order-products">
+                            {{#each data}}
+                            <div class="order-col">
+                                <div>{{this.qty}}x {{this.cartitem.name}}</div>
+                                <div class="intotal">{{this.total}}</div>
+                            </div>
+                            {{!-- <div class="order-col">
+                                <div>2x Product Name Goes Here</div>
+                                <div>Rs</div>
+                            </div> --}}
+                            {{/each}}
+                        </div>
+                        <div class="order-col">
+                            <div>Shiping</div>
+                            <div><strong>FREE</strong></div>
+                        </div>
+                        <div class="order-col">
+                            <div><strong>TOTAL</strong></div>
+                            <div><strong id="total" class="order-total"> {{cartTotal.total}}</strong></div>
+                        </div>
+
+                        <div class="order-col" style="">
+                            <span id="error" style="color: red;"></span>
+                            <input class="input" type="text" value="" name="coupon" placeholder="Enter Promo code"
+                                id="code">
+                            <button class="btn btn-primary" onclick="coupon()"
+                                style="margin-left: 262px;margin-top: 10px;" id="apply"> Apply</button>
+                        </div>
+                    </div>
+
+
+                    <a href="/proceed" class="primary-btn order-submit" id="dis">Proced to payment</a>
+
+                </div>
+                {{/if}}
+                <!-- /product tab -->
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /SECTION -->
+
+    <!-- Section -->
+
+    <!-- /Section -->
+
+    <!-- NEWSLETTER -->
+
+    <!-- /NEWSLETTER -->
+
+    <!-- FOOTER -->
+
+    {{>userfooter}}
+    <!-- /FOOTER -->
+
+    <!-- jQuery Plugins -->
+
+    <script src="/user/javascripts/removeproduct.js"></script>
+    <script src="/user/javascripts/coupon.js"></script>
+
+    <script src="/user/javascripts/changequantity.js"></script>
+    <script src="/user/javascripts/jquery.min.js"></script>
+    <script src="/user/javascripts/bootstrap.min.js"></script>
+    <script src="/user/javascripts/slick.min.js"></script>
+    <script src="/user/javascripts/nouislider.min.js"></script>
+    <script src="/user/javascripts/jquery.zoom.min.js"></script>
+    <script src="/user/javascripts/main.js"></script>
+    {{!--
+    <script src="/user/javascripts/coupon.js"></script> --}}
+
+</body>
+
+</html>

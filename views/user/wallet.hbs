@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {{>header}}
+    <style>
+        /* Text alignment for body */
+
+
+
+
+        /* Styling modal */
+        .modal:before {
+            content: '';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        .modal-dialog {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .modal .modal-content {
+            padding: 20px 20px 20px 20px;
+            -webkit-animation-name: modal-animation;
+            -webkit-animation-duration: 0.5s;
+            animation-name: modal-animation;
+            animation-duration: 0.5s;
+        }
+
+        @-webkit-keyframes modal-animation {
+            from {
+                top: -100px;
+                opacity: 0;
+            }
+
+            to {
+                top: 0px;
+                opacity: 1;
+            }
+        }
+
+        @keyframes modal-animation {
+            from {
+                top: -100px;
+                opacity: 0;
+            }
+
+            to {
+                top: 0px;
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+{{>userheaders}}
+
+
+
+<body>
+
+
+    <!-- NAVIGATION -->
+
+    <!-- /NAVIGATION -->
+
+    <!-- BREADCRUMB -->
+
+    <!-- /BREADCRUMB -->
+
+    <!-- SECTION -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+
+                <div class="col-md col-md" id="reload">
+                    <section style="background-color: #eee;">
+                        <div class="container py-5">
+
+
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="card mb-4">
+                                        <div class="card-body text-center">
+                                            <img src="/user/images/profile-pic-male.svg" alt="avatar"
+                                                class="rounded-circle img-fluid" style="width: 150px;">
+                                            <h5 class="my-3">{{user.Name}}</h5>
+                                            {{!-- <p class="text-muted mb-1">Full Stack Developer</p>
+                                            <p class="text-muted mb-4">Bay Area, San Francisco, CA</p> --}}
+                                            <div class="d-flex justify-content-center mb-2">
+                                                {{!-- <button type="button" class="btn btn-primary">Follow</button> --}}
+                                                {{!-- <button type="button"
+                                                    class="btn btn-outline-primary ms-1">Message</button> --}}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {{>userprofileSideBar}}
+
+                                </div>
+                                <hr>
+                                <div class="col-lg-8 text-center">
+                                    <div class="row">
+                                        <h2 style="font-weight: 500;">Wallet</h2>
+                                        <div class="col-lg-3">
+                                            <div class="card"
+                                                style="margin-top: 75px; border-radius:10px ; width: 300px; height: 75px; background-color: rgb(250, 212, 212);">
+                                                <div class="card-head"
+                                                    style="background-color: rgb(250, 92, 92); border-radius:10px ; ">
+                                                    <h3>Wallet</h3>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h4>Current Balance: {{wallet.[0].amount}}</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 ml-5" style="margin-left: 260px;">
+                                            <div class="card"
+                                                style="margin-top: 75px; border-radius:10px ; width: 300px; height: 75px; background-color: rgb(250, 212, 212);">
+                                                <div class="card-head"
+                                                    style="background-color: rgb(250, 92, 92); border-radius:10px ; ">
+                                                    <h3>Referal Code</h3>
+                                                </div>
+                                                <div class="card-body">
+                                                    <h4> {{user.refcode}}</h4>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                        {{#each wallet}}
+
+                                        <div class="card col-lg-10 ml-5 text-left"
+                                            style="background-color: white; border-radius:10px ; margin-top: 15px;">
+                                            <div class="card-body">
+                                              
+                                                <p class="card-text">
+                                                    {{this.history.type}},{{this.history.payment }}
+                                                </p>
+                                                {{#if this.history.refundAmount }}
+                                                <p class="card-text" style="color: green;">
+                                                    Refund :+ {{this.history.refundAmount}}
+                                                </p>
+                                                {{else}}
+                                                <p class="card-text" style="color: red;">
+                                                    Purchse : -{{this.history.purchseAmount}}
+                                                </p>
+                                                {{/if}}
+                                                 
+
+                                            </div>
+                                        </div>
+                                        {{/each}}
+                                    </div>
+
+                    </section>
+
+                </div>
+
+                <!-- /product tab -->
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+
+    {{>userfooter}}
+    <!-- /FOOTER -->
+
+
+    <script src="/user/javascripts/formvalidateupdate.js"></script>
+    <script src="/user/javascripts/jquery.min.js"></script>
+    <script src="/user/javascripts/bootstrap.min.js"></script>
+    <script src="/user/javascripts/slick.min.js"></script>
+    <script src="/user/javascripts/nouislider.min.js"></script>
+    <script src="/user/javascripts/jquery.zoom.min.js"></script>
+    <script src="/user/javascripts/main.js"></script>
+
+</body>
+
+</html>

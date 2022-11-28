@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {{>header}}
+
+</head>
+
+{{>userheaders}}
+
+
+
+<body>
+
+    <!-- SECTION -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+
+                <div class="col-md col-md" id="reload">
+                    <section style="background-color: #eee;">
+                        <div class="container py-5">
+
+
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="card mb-4" style="margin-top: 20px;">
+                                        <div class="card-body text-center" >
+                                            <img src="/user/images/profile-pic-male.svg" alt="avatar"
+                                                class="rounded-circle img-fluid" style="width: 150px;">
+                                            <h5 class="my-3">{{user.Name}}</h5>
+                                            {{!-- <p class="text-muted mb-1">Full Stack Developer</p>
+                                            <p class="text-muted mb-4">Bay Area, San Francisco, CA</p> --}}
+                                            <div class="d-flex justify-content-center mb-2">
+                                                {{!-- <button type="button" class="btn btn-primary">Follow</button> --}}
+                                                {{!-- <button type="button"
+                                                    class="btn btn-outline-primary ms-1">Message</button> --}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    {{>userprofileSideBar}}
+ 
+
+                                </div>
+                                <hr>
+                                <div class="col-lg-8">
+                                    <div class="card mb-4" >
+                                        <div class="card-body">
+                                            <div class="row">
+
+
+                                                <div class="col-sm-3">
+                                                    <p class="mb-0">Full Name</p>
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <p class="text-muted mb-0">{{user.Name}}</p>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <p class="mb-0">Email</p>
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <p class="text-muted mb-0">{{user.Email}}</p>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div class="row">
+                                                <div class="col-sm-3">
+                                                    <p class="mb-0">Mobile</p>
+                                                </div>
+                                                <div class="col-sm-9">
+                                                    <p class="text-muted mb-0">{{user.mobile}}</p>
+                                                    {{!-- <a href="">Edit</a> --}}
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                        <!-- Button trigger modal -->
+                                        <button type="button" class="btn btn-primary" data-toggle="modal"
+                                            data-target="#exampleModalCenter">
+                                            Edit Details
+                                        </button>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade text-center" id="exampleModalCenter" tabindex="-1"
+                                            role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle">Edit Deteils
+                                                        </h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+
+                                                        {{!-- <form onsubmit="return validate()"
+                                                            action="/updateUserData" method="post"> --}}
+                                                            <form onsubmit="return validate()" id="update">
+                                                                <input type="text" name="userId" value={{user._id}}
+                                                                    hidden>
+                                                                {{#if errorMessage}}
+                                                                <p style="color: red;">{{errorMessage}}</p>
+                                                                {{/if}}
+                                                                <div class="form-outline mb-4">
+                                                                    <label class="form-label"
+                                                                        for="form2Example1">Name</label>
+                                                                    <input oninput="validateName()" type="text"
+                                                                        id="name" class="form-control" name="Name"
+                                                                        value="{{user.Name}}" />
+                                                                    <span id="name-error" class="valerr"></span>
+
+                                                                </div>
+                                                                <!-- Email input -->
+                                                                <div class="form-outline mb-4">
+                                                                    <label class="form-label">Email address</label>
+                                                                    <input oninput="validateEmail()" type="email"
+                                                                        id="email" class="form-control" name="Email"
+                                                                        value="{{user.Email}}" />
+
+                                                                    <span id="email-error" class="valerr"></span>
+                                                                </div>
+                                                                <!-- mobile input -->
+                                                                <div class="form-outline mb-4">
+                                                                    <label class="form-label">Mobile</label>
+                                                                    <input oninput="validateMobile()" type="phone"
+                                                                        id="mobile" class="form-control" name="mobile"
+                                                                        value="{{user.mobile}}" />
+
+                                                                    <span id="mobile-error" class="valerr"></span>
+                                                                </div>
+                                                                <!-- Password input -->
+                                                                <div class="form-outline mb-4">
+                                                                    <span id="error" style="color: red;"></span>
+                                                                    <label class="form-label"> Enter current
+                                                                        Password</label>
+                                                                    <input type="password" class="form-control"
+                                                                        name="Password" />
+
+                                                                    <span id="password-error" class="valerr"></span>
+                                                                </div>
+                                                                <!-- Password new -->
+                                                                <div class="form-outline mb-4">
+                                                                    <label class="form-label">New Password</label>
+                                                                    <input oninput="validatePassword()" type="password"
+                                                                        id="password" class="form-control"
+                                                                        name="newpassword" />
+
+                                                                    <span id="Password-error" class="valerr"></span>
+                                                                </div>
+
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Close</button>
+                                                        <button type="submit" id="apply" class="btn btn-primary">Save
+                                                            changes</button>
+                                                    </div>
+                                                    </form>
+                                                    <div class="">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{!-- modal --}}
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+
+                <!-- /product tab -->
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+
+    {{>userfooter}}
+    <!-- /FOOTER -->
+  <script src="/user/javascripts/editdetailsUser.js"></script>
+
+    <script src="/user/javascripts/formvalidateupdate.js"></script>
+    <script src="/user/javascripts/jquery.min.js"></script>
+    <script src="/user/javascripts/bootstrap.min.js"></script>
+    <script src="/user/javascripts/slick.min.js"></script>
+    <script src="/user/javascripts/nouislider.min.js"></script>
+    <script src="/user/javascripts/jquery.zoom.min.js"></script>
+    <script src="/user/javascripts/main.js"></script>
+
+</body>
+
+</html>

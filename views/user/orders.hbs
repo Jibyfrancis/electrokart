@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {{>header}}
+
+</head>
+
+{{>userheaders}}
+
+
+
+<body>
+
+
+    <!-- NAVIGATION -->
+
+    <!-- /NAVIGATION -->
+
+    <!-- BREADCRUMB -->
+
+    <!-- /BREADCRUMB -->
+
+    <!-- SECTION -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="card">
+                {{!-- <a href="/orderhistory" class="btn btn-danger " style="margin-left: 65em;"> Order History</a> --}}
+                <div class="col-md col-md">
+                    <table class="table mt-5 fixed" id="table1">
+                        {{#each orders}}
+
+                        <thead>
+                            {{!--
+                            <col width="20px" />
+                            <col width="20px" />
+                            <col width="20px" />
+                            <col width="20px" />
+                            <col width="20px" />
+                            <col width="20px" />
+                            <col width="20px" /> --}}
+                            <tr>
+                                {{!-- <th scope="col">Order ID</th> --}}
+                                <th scope="col">Item</th>
+                                <th scope="col">Amount</th>
+
+                                <th scope="col">Payment</th>
+                                <th scope="col">Order Date</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Address</th>
+
+                                <th scope="col">Order ID</th>
+                                <th scope="col">Action</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            <tr>
+                                <td> <img style="width:70px; height:70; "
+                                        src="/user/productimage/{{this.cartitem.images.[0]}}" alt=""></td>
+                                <td>{{this.productTotal}}</td>
+                                <td>{{this.payment}}</td>
+                                <td>{{this.orderDate}}</td>
+                                <td style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; color: rgb(224, 38, 38);" >{{this.orderStatus}}</td>
+                                <td>
+                                     <h4 class="card-title">{{this.deliveryAddress.name}}</h4>
+                                    <p class="card-text">
+                                {{this.deliveryAddress.address}},{{this.deliveryAddress.city}},{{this.deliveryAddress.country}}{{this.deliveryAddress.pin}}
+                            </p>
+                            <p class="card-text">{{this.deliveryAddress.mobile}}{{this.deliveryAddress.email}}</p>
+                                </td>
+
+                                <td>{{this._id}}</td>
+                                {{!-- {{#if this.cancelStatus}}
+                                <td></td>
+
+                                {{else}}
+                                {{#if this.deliveredStatus}}
+                                <td><a href="/returnOrder/{{this._id}}/{{this.cartitem._id}}" class="btn btn-danger"
+                                        style="width:120px ;">Return</a></td>
+                                {{else}}
+                                <td><a href="/cancelOrder/{{this._id}}/{{this.cartitem._id}}" class="btn btn-danger"
+                                        style="width:120px ;">CancelOrder</a></td>
+                                {{/if}}
+
+                                {{/if}} --}}
+                                {{#if_eq this.orderStatus 'Delivered'}}
+                                <td><a href="/returnOrder/{{this._id}}/{{this.cartitem._id}}" class="btn btn-danger"
+                                        style="width:120px ;">Return</a></td>
+                                {{else}}
+                                
+                                {{#if_Neq this.orderStatus 'Shipped'}}
+                                {{#if_Neq this.orderStatus 'Returned'}}
+                                {{#if_Neq this.orderStatus 'Refund Approved'}}
+                                 {{#if_Neq this.orderStatus 'Cancelled'}}
+                                
+                                <td><a href="/cancelOrder/{{this._id}}/{{this.cartitem._id}}" class="btn btn-danger"
+                                        style="width:120px ;">CancelOrder</a></td>
+
+
+                                {{/if_Neq}}
+                                {{/if_Neq}}
+                                {{/if_Neq}}
+                                {{/if_Neq}}
+                                {{/if_eq}}
+
+
+
+
+
+
+
+                                {{!-- <td><a href="/cancelOrder/{{this._id}}/{{this.cartitem._id}}"
+                                        class="btn btn-danger">Cancel Order</a></td> --}}
+                                {{!-- <td><a href="/viewOrder/{{this._id}}" class="btn btn-primary">View Order</a></td>
+                                --}}
+
+
+                            </tr>
+
+
+                        </tbody>
+                        {{/each}}
+
+                    </table>
+                    <br>
+
+                </div>
+
+                <!-- /product tab -->
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /SECTION -->
+
+    <!-- Section -->
+
+    <!-- /Section -->
+
+    <!-- NEWSLETTER -->
+
+    <!-- /NEWSLETTER -->
+
+    <!-- FOOTER -->
+
+    {{>userfooter}}
+    
+    <!-- /FOOTER -->
+
+    <!-- jQuery Plugins -->
+   
+    <script src="/user/javascripts/jquery.min.js"></script>
+    <script src="/user/javascripts/bootstrap.min.js"></script>
+    <script src="/user/javascripts/slick.min.js"></script>
+    <script src="/user/javascripts/nouislider.min.js"></script>
+    <script src="/user/javascripts/jquery.zoom.min.js"></script>
+    <script src="/user/javascripts/main.js"></script>
+   
+
+</body>
+
+</html>

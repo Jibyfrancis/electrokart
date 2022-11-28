@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   {{>header}}
+  </head>
+{{>userheaders}}
+
+{{!--
+<form method="post" action="/verify-otp">
+  <label class="form-label" for="form2Example1">Enter code </label>
+  <input type="number" id="otp-input" placeholder="e.g. 123456" name="code" />
+  <button type="submit" id="verify-submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+
+</form> --}}
+<div class="container "  style="margin:auto; padding-left: 300px; padding-right: 300px;">
+    <div class="row">
+        <div class="col-md m-auto">
+          <form action="/otp-login" method="post" id="phone-form">
+
+                <!-- mobile login -->
+                {{#if numError}}
+                <p>{{numError}}</p>
+                {{/if}}
+                
+
+            
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="form2Example1">Mobile</label>
+                    <input type="phone" class="form-control" id="phone-number-input" name="phonenumber" value="{{number.mobile}}" required />
+
+                </div>
+
+                <br>
+
+                <!-- Submit button -->
+                <button type="submit" id="verify-submit" class="btn btn-danger btn-block mb-4">Get OTP</button>
+        
+            </form>
+            <form method="post" action="/verify-otp">
+              <div class="form-outline mb-4">
+                <label class="form-label" for="form2Example2">Enter Code</label>
+                <input type="test" class="form-control" id="otp-input" name="code" required />
+
+              </div>
+              <br>
+
+              <!-- Submit button -->
+              <button type="submit" id="verify-submit" class="btn btn-danger btn-block mb-4">Sign In</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+

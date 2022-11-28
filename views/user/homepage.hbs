@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    {{>header}}
+</head>
+
+<body>
+    {{>userheaders}}
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="autoplay">
+
+
+                    {{#each cat}}
+                    <div class="col-md-4 col-xs-6">
+                        <div class="shop">
+                            <div class="shop-img" style="height: 250px; width: auto;">
+                                <img src="/user/productimage/{{this.images.[0]}}" style="" alt="">
+                            </div>
+                            <div class="shop-body">
+                                <h3 class="cat">{{this.category}}<br>Collection</h3>
+                                <a href="/products/{{this.category}}" class="cta-btn">Shop now <i
+                                        class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                    <!-- /shop -->
+                </div>
+                <!-- shop -->
+
+                <!-- /shop -->
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /SECTION -->
+
+    <!-- SECTION -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+
+                <!-- section title -->
+                <div class="col-md-12">
+                    <div class="section-title">
+                        <h3 class="title">New Products</h3>
+                        <div class="section-nav">
+                            <ul class="section-tab-nav tab-nav" id="myUL">
+                                <li class="active"><a data-toggle="tab" href="#tab1">Laptops</a></li>
+                                <li><a data-toggle="tab" href="#tab1">Smartphones</a></li>
+                                <li><a data-toggle="tab" href="#tab1">Cameras</a></li>
+                                <li><a data-toggle="tab" href="#tab1">Accessories</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- /section title -->
+
+                <!-- Products tab & slick -->
+               
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="products-tabs">
+                            <!-- tab -->
+                            <div id="tab1" class="tab-pane active">
+                                <div class="products-slick" data-nav="#slick-nav-1">
+                                    <!-- product -->
+                                    {{#each products}}
+                                    <!-- product -->
+
+                                    <div class="product">
+                                        <div class="product-img" style="">
+                                            <img src="/user/productimage/{{this.images.[0]}}" style="height: 250px; width: auto;" alt="">
+                                            <div class="product-label">
+                                                {{#if this.categoryOffer}}
+                                                <span class="sale">{{this.categoryOffer}}%</span>
+                                                <span class="new">NEW</span>
+                                                {{/if}}
+                                            </div>
+                                        </div>
+                                        <div class="product-body">
+                                            <p class="product-category">{{this.category}}</p>
+                                            <h3 class="product-name"><a href="/product/{{this._id}}">{{this.name}}</a>
+                                            </h3>
+                                            <h4 class="product-price">{{this.offerPrice}} <del
+                                                    class="product-old-price">{{this.price}}</del></h4>
+                                            <div class="product-rating">
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <!-- /product -->
+
+
+                                    {{/each}}
+
+
+                                </div>
+                                <div id="slick-nav-1" class="products-slick-nav"></div>
+                            </div>
+                            <!-- /tab -->
+                        </div>
+                    </div>
+                </div>
+                <!-- Products tab & slick -->
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /SECTION -->
+    
+
+
+    <!-- FOOTER -->
+
+    {{>userfooter}}
+    <!-- /FOOTER -->
+
+    <!-- jQuery Plugins -->
+    <script src="/user/javascripts/jquery.min.js"></script>
+    <script src="/user/javascripts/bootstrap.min.js"></script>
+    <script src="/user/javascripts/slick.min.js"></script>
+    <script src="/user/javascripts/nouislider.min.js"></script>
+    <script src="/user/javascripts/jquery.zoom.min.js"></script>
+    <script src="/user/javascripts/main.js"></script>
+    <script src="/user/javascripts/addtowishlist.js"></script>
+
+</body>
+
+</html>

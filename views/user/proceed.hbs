@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{>header}}
+
+</head>
+
+
+{{>userheaders}}
+
+<body>
+
+
+    <!-- SECTION -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+
+                <div class="col-md-7">
+                    <!-- Billing Details -->
+                    {{#if address}}
+
+                    <form action="/defaultAddress" method="post">
+                        <div class="billing-details" id="reload">
+                            <h4>Delivery Address</h4>
+                            {{#each address}}
+
+                            <div class="card card-block"
+                                style="background-color:rgb(245, 232, 232); padding-left: 25px; width:55%; border-radius: 12px;">
+                                <input type="radio" value="{{this.address._id}}" name="select" required>
+                                
+                    </form>
+                    <h4 class="card-title">{{this.address.name}}</h4>
+                    <p class="card-text">{{this.address.address}},{{this.address.city}},{{this.address.country}}</p>
+                    <p class="card-text">{{this.address.email}},{{this.address.mobile}}</p>
+                    <a class=" btn btn-success " style="margin-bottom: 20px;"
+                        onclick="showmodal('{{this.address._id}}')" data-toggle="modal">Edit</a>
+
+                    {{!-- <a class=" btn btn-success " style="margin-bottom: 20px; padding: 0;"
+                        data-target="#exampleModalCenter" data-toggle="modal">Edit</a> --}}
+                        
+
+                </div>
+
+
+                <!-- Modal -->
+                <div class="modal fade text-left" id="exampleModalCenter" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Edit Address
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+
+                                {{!-- <form onsubmit="return validate()" action="/updateUserData" method="post"> --}}
+
+                                    <form onsubmit="return " id="editaddress">
+                                        <input type="text" name="userid" value="{{../user._id}}" hidden>
+                                        <input type="text" id="addressid" name="address_id" value="" hidden>
+
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label" for="form2Example1">Name</label>
+                                            <input type="text" id="name" class="form-control" name="name" value="" />
+
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label" for="form2Example1">Mobile</label>
+                                            <input type="text" id="mobile" class="form-control" name="mobile"
+                                                value="" />
+                                        </div>
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label" for="form2Example1">Email</label>
+                                            <input type="text" id="email" class="form-control" name="email" value="" />
+
+
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label" for="form2Example1">Address</label>
+                                            <input type="text" id="address" class="form-control" name="address"
+                                                value="" />
+
+
+                                        </div>
+
+
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label" for="form2Example1">City</label>
+                                            <input type="text" id="city" class="form-control" name="city" value="" />
+
+
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label" for="form2Example1">Country</label>
+                                            <input type="text" id="country" class="form-control" name="country"
+                                                value="" />
+
+
+                                        </div>
+
+                                        <div class="form-outline mb-4">
+                                            <label class="form-label" for="form2Example1">Pin</label>
+                                            <input type="text" id="pin" class="form-control" name="pin" value="" />
+
+
+                                        </div>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" id="apply" class="btn btn-primary">Save
+                                    changes</button>
+                            </div>
+                            </form>
+                            <div class="">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{!-- modal --}}
+                <br>
+                {{/each}}
+
+                <p>
+
+                    <button class="btn btn-secondary " type="button" data-toggle="collapse" data-target="#collapseExample"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        Use Diffrent Address <span>   </span><i class="fa fa-address-book-o" aria-hidden="true"></i>
+                    </button>
+                </p>
+                <div class="collapse" id="collapseExample">
+
+                        {{#each allAddress}}
+                    <div class="card card-block" style="background-color:rgb(245, 232, 232) ;padding-left: 25px; width:55%; border-radius: 12px; height: 125px;">
+                        <div class="caption">
+                            <input type="radio" value="{{this.address._id}}" name="select" required>
+                            <h4 class="card-title">{{this.address.name}}</h4>
+                            <p class="card-text">
+                                {{this.address.address}},{{this.address.city}},{{this.address.country}},
+                                {{this.address.email}},{{this.address.mobile}}
+                            </p>
+                            <a class="" style="padding: 0;"
+                                onclick="showmodal('{{this.address._id}}')" data-toggle="modal"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                        </div>
+
+                    </div>
+                    <br>
+                        {{/each}}
+                </div>
+
+                <button class="primary-btn order-submit" type="submit" style="">Use this address</button>
+
+
+            </div>
+            {{!-- --}}
+
+
+
+
+            {{!-- --}}
+
+
+
+            {{/if}}
+
+
+
+            {{!-- <form class="form-group" id="address"> --}}
+                <form class="form-group" action="/newAddress" method="post" id="address">
+                    <input type="text" name="userid" value="{{user._id}}" hidden>
+
+                    <!-- /Billing Details -->
+
+                    <!-- Shiping Details -->
+                    <div class="shiping-details">
+                        <div class="section-title">
+                            {{!-- <h3 class="title">Shiping address</h3> --}}
+                        </div>
+                        <div class="input-checkbox">
+                            <input type="checkbox" id="shiping-address">
+                            <label for="shiping-address">
+                                <span></span>
+                                Add a diffrent address?
+                            </label>
+                            <div class="caption">
+                                <div class="form-group">
+                                    <input class="input" type="text" name="name" placeholder="Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <input class="input" type="text" name="mobile" placeholder="Mobile" required>
+                                </div>
+                                <div class="form-group">
+                                    <input class="input" type="email" name="email" placeholder="Email" required>
+                                </div>
+                                <div class="form-group">
+                                    <input class="input" type="text" name="address" placeholder="Address" required>
+                                </div>
+                                <div class="form-group">
+                                    <input class="input" type="text" name="city" placeholder="City" required>
+                                </div>
+                                <div class="form-group">
+                                    <input class="input" type="text" name="country" placeholder="Country" required>
+                                </div>
+                                <div class="form-group">
+                                    <input class="input" type="text" name="pin" placeholder="Pin Code" required>
+                                </div>
+                                <button class="primary-btn order-submit" type="submit">Use this address</button>
+                            </div>
+                        </div>
+                    </div>
+
+        </div>
+
+        <!-- Order Details -->
+        <div class="col-md-5 order-details">
+            <div class="section-title text-center">
+                <h3 class="title">Your Order</h3>
+            </div>
+            <div class="order-summary">
+                <div class="order-col">
+                    <div><strong>PRODUCT</strong></div>
+                    <div><strong>TOTAL</strong></div>
+                </div>
+                <div class="order-products">
+                    {{#each products}}
+                    <div class="order-col">
+                        <div>{{this.qty}}x {{this.cartitem.name}}</div>
+                        <div>Rs {{this.total}}</div>
+                    </div>
+                    {{!-- <div class="order-col">
+                        <div>2x Product Name Goes Here</div>
+                        <div>Rs</div>
+                    </div> --}}
+                    {{/each}}
+                </div>
+                <div class="order-col">
+                    <div>Shiping</div>
+                    <div><strong>FREE</strong></div>
+                </div>
+                <div class="order-col">
+                    <div><strong>TOTAL</strong></div>
+                    <div><strong class="order-total">Rs {{cartTotal.total}}</strong></div>
+                </div>
+            </div>
+            {{!-- <div class="payment-method">
+                <div class="input-radio">
+                    <input type="radio" name="payment" id="payment-1" required value="COD">
+                    <label for="payment-1">
+                        <span></span>
+                        COD
+                    </label>
+                    <div class="caption">
+                        <p>Cash on Delivery</p>
+                    </div>
+                </div>
+                <div class="input-radio">
+                    <input type="radio" name="payment" id="payment-2">
+                    <label for="payment-2">
+                        <span></span>
+                        Razorpay
+                    </label>
+                    <div class="caption">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                </div>
+                <div class="input-radio">
+                    <input type="radio" name="payment" id="payment-3">
+                    <label for="payment-3">
+                        <span></span>
+                        Paypal System
+                    </label>
+                    <div class="caption">
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                            incididunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="input-checkbox">
+                <input type="checkbox" id="terms" required>
+                <label for="terms">
+                    <span></span>
+                    I've read and accept the <a href="#">terms & conditions</a>
+                </label>
+            </div> --}}
+            {{!-- <button class="primary-btn order-submit" type="submit" style="padding: 12px 114px;">Use this
+                address</button> --}}
+            {{!-- <a class="primary-btn order-submit" type="submit">Place order</a> --}}
+        </div>
+        </form>
+        <!-- /Order Details -->
+    </div>
+    <!-- /row -->
+    </div>
+    <!-- /container -->
+    </div>
+    <!-- /SECTION -->
+
+    <!-- NEWSLETTER -->
+
+    <!-- /NEWSLETTER -->
+
+    <!-- FOOTER -->
+
+    {{>userfooter}}
+
+    <!-- /FOOTER -->
+  <script src="/user/javascripts/addaddress.js"></script>
+
+   <script src="/user/javascripts/editaddress.js"></script>
+
+  <script src="/user/javascripts/editaddresmodal.js"></script>
+
+
+    <!-- jQuery Plugins -->
+    <script src="/user/javascripts/jquery.min.js"></script>
+    <script src="/user/javascripts/bootstrap.min.js"></script>
+    <script src="/user/javascripts/slick.min.js"></script>
+    <script src="/user/javascripts/nouislider.min.js"></script>
+    <script src="/user/javascripts/jquery.zoom.min.js"></script>
+    <script src="/user/javascripts/main.js"></script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{>header}}
+
+</head>
+
+
+{{>userheaders}}
+
+<body>
+
+
+    <!-- SECTION -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+
+                <div class="col-md-7">
+                    <!-- Billing Details -->
+
+                    <div class="billing-details">
+                        <h4>Delivery Address</h4>
+                        {{#each address}}
+
+                        <div class="card card-block" style="background-color:rgb(245, 232, 232); width: 55%; padding: 20px; border-radius: 12px;" >
+                            {{!-- <input type="radio" value="{{this._id}}" name="select"> --}}
+                            <h4 class="card-title">{{this.address.name}}</h4>
+                            <p class="card-text">
+                                {{this.address.address}},{{this.address.city}},{{this.address.country}},{{this.address.pin}}
+                            </p>
+                            <p class="card-text">{{this.address.mobile}},{{this.address.email}}</p>
+                            {{!-- <a href="#" class="card-link">Card link</a>
+                            <a href="#" class="card-link">Another link</a> --}}
+                        </div>
+                        {{/each}}
+
+                    </div>
+
+
+                    {{!-- <form class="form-group" action="/ordersuccess" method="post"> --}}
+                        <form class="form-group" id="checkout-form">
+                            <input type="text" name="userid" value="{{user._id}}" hidden>
+
+                            <!-- /Billing Details -->
+
+                            <!-- Shiping Details -->
+                            <div class="shiping-details">
+                                <div class="section-title">
+                                    {{!-- <h3 class="title">Shiping address</h3> --}}
+                                </div>
+
+                            </div>
+                        
+                </div>
+
+                <!-- Order Details -->
+                <div class="col-md-5 order-details">
+                    <div class="section-title text-center">
+                        <h3 class="title">Your Order</h3>
+                    </div>
+                    <div class="order-summary">
+                        <div class="order-col">
+                            <div><strong>PRODUCT</strong></div>
+                            <div><strong>TOTAL</strong></div>
+                        </div>
+                        <div class="order-products">
+                            {{#each products}}
+                            <div class="order-col">
+                                <div>{{this.qty}}x {{this.cartitem.name}}</div>
+                                <div>Rs {{this.total}}</div>
+                                 {{!-- <input type="number" name="itemtotal" value="{{this.total}}" hidden> --}}
+                            </div>
+                            {{!-- <div class="order-col">
+                                <div>2x Product Name Goes Here</div>
+                                <div>Rs</div>
+                            </div> --}} 
+                            {{/each}}
+                        </div>
+                        <div class="order-col">
+                            <div>Shiping</div>
+                            <div><strong>FREE</strong></div>
+                        </div>
+                        <div class="order-col">
+                            <div><strong>TOTAL</strong></div>
+                            <div ><strong class="order-total" >Rs {{cartTotal.total}}</strong></div>
+                        </div>
+                        <div>
+                            <span id="nofund" style="color: red; font-weight:500; font-size: medium;"></span>
+                        </div>
+                    </div>
+                    <div class="payment-method">
+                        <input type="text" name="total" value="{{cartTotal.total}}" hidden>
+                        <div class="input-radio">
+                            
+                            <input type="radio" name="payment" id="payment-1" required value="COD">
+                            <label for="payment-1">
+                                <span></span>
+                                COD
+                            </label>
+                            {{!-- <div class="caption">
+                                <p>Cash on Delivery</p>
+                            </div> --}}
+                        </div>
+                        <div class="input-radio">
+                            <input type="radio" name="payment" id="payment-2" value="Razorpay">
+                            <label for="payment-2">
+                                <span></span>
+                                Razorpay
+                            </label>
+                            {{!-- <div class="caption">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua.</p>
+                            </div> --}}
+                        </div>
+                        <div class="input-radio">
+                            <input type="radio" name="payment" id="payment-3" value="Paypal">
+                            <label for="payment-3">
+                                <span></span>
+                                Paypal System
+                            </label>
+                            {{!-- <div class="caption">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua.</p>
+                            </div> --}}
+                        </div>
+                        <div class="input-radio">
+                            <input type="radio" name="payment" id="payment-4" value="Wallet">
+                            <label for="payment-4">
+                                <span></span>
+                                Wallet
+                            </label>
+                            {{!-- <div class="caption">
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                    incididunt ut labore et dolore magna aliqua.</p>
+                            </div> --}}
+                        </div>
+                    </div>
+                    <div class="input-checkbox">
+                        <input type="checkbox" id="terms" required>
+                        <label for="terms">
+                            <span></span>
+                            I've read and accept the <a href="#">terms & conditions</a>
+                        </label>
+                    </div>
+                    <button class="primary-btn order-submit" type="submit" style="padding: 12px 114px;">Place
+                        Order</button>
+                    {{!-- <a class="primary-btn order-submit" type="submit">Place order</a> --}}
+                </div>
+                </form>
+                <!-- /Order Details -->
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /SECTION -->
+
+    <!-- NEWSLETTER -->
+  
+    <!-- /NEWSLETTER -->
+
+    <!-- FOOTER -->
+    
+    {{>userfooter}}
+    <!-- /FOOTER -->
+   
+
+    <script>
+
+        $('#checkout-form').submit((e) => {
+            e.preventDefault()
+            $.ajax({
+                url: '/checkout',
+                method: 'post',
+                data: $('#checkout-form').serialize(),
+                success: (response) => {
+                    
+                    if (response.codSuccess) {
+                        location.href = '/ordersuccess'
+                    } else if(response.razorpay){
+                        alert(response.user.Name)
+                        razorpayPayment(response)
+                    }else if(response.wallet){
+                        if(response.message){
+                            alert('nofund')
+                            nofund.innerHTML=""
+                            document.getElementById('nofund').innerHTML=response.message
+
+                        }else{
+
+                        location.href = '/ordersuccess'
+                        }
+
+                    }else{
+                        alert(response)
+                        location.href=response
+                    }
+
+                }
+
+
+            })
+        })
+       function razorpayPayment(order) {
+        
+            var options = {
+                "key": "rzp_test_GJkSeU9NhkD1zi", // Enter the Key ID generated from the Dashboard
+                "amount":order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": "INR",
+                "name": "Electro",
+                "description": "Test Transaction",
+                "image": "https://example.com/your_logo",
+                "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                "handler": function (response) {
+                    alert(response.razorpay_payment_id);
+                    alert(response.razorpay_order_id);
+                    alert(response.razorpay_signature);
+                    verifyPayment(response,order);
+                },
+                "prefill": {
+                    "name": order.user.Name,
+                    "email": order.user.Email,
+                    "contact": order.user.mobile,
+                },
+                "notes": {
+                    "address": "Razorpay Corporate Office"
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+            var rzp1 = new Razorpay(options);
+            rzp1.on('payment.failed',function(response){
+                location.href='/payment-failed'
+            })
+             rzp1.open();
+        }
+        function verifyPayment(payment, order) {
+            alert(payment)
+            $.ajax({
+                url:'/verifypayment',
+                data: {
+                    payment,
+                    order
+
+                },
+                method: 'post',
+                success:(response)=>{
+                    alert('ordersussess')
+                    if(response.status){
+                        
+                        location.href ='/ordersuccess'
+                    }else{
+                        alert('Payment Failed')
+                    }
+                }
+            })
+        }
+        
+
+    </script>
+
+    <!-- jQuery Plugins -->
+    <script src="/user/javascripts/jquery.min.js"></script>
+    <script src="/user/javascripts/bootstrap.min.js"></script>
+    <script src="/user/javascripts/slick.min.js"></script>
+    <script src="/user/javascripts/nouislider.min.js"></script>
+    <script src="/user/javascripts/jquery.zoom.min.js"></script>
+    <script src="/user/javascripts/main.js"></script>
+
+</body>
+
+</html>

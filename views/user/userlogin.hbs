@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {{>header}}
+  </head>
+
+{{>userheaders}}
+<div class="container "  style="margin:auto; padding-left: 300px; padding-right: 300px;">
+    <div class="row">
+        <div class="col-md m-auto">
+            <h1>Login</h1>
+            <form action="/userlogin" method="post">
+                <!-- Email input -->
+
+                {{#if loginErr}}
+                <p>{{loginErr}}</p>
+                {{/if}}
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="form2Example1">Email address</label>
+                    <input type="email" class="form-control" id="email" name="Email" required />
+
+                </div>
+
+                <!-- Password input -->
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="form2Example2">Password</label>
+                    <input type="password" class="form-control" id="password" name="Password"  required />
+
+                </div>
+                <br>
+
+                <!-- Submit button -->
+                <button type="submit"  class="btn btn-danger btn-block mb-4">Sign in</button>
+                
+            </form>
+            <div class="text-center">
+                    <p>OR</p>
+
+                    <h5> <a href="/otp-login">login with Mobile Number</a></h5>
+                </div>
+                <div class="text-center">
+                    <p>Not a member? <a href="/signup">Sign Up</a></p>
+                </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {{>header}}
+
+</head>
+
+{{>userheaders}}
+
+
+<body>
+
+
+    <!-- SECTION -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+
+                <div class="col-md col-md" id="">
+                    <section style="background-color: #eee;">
+                        <div class="container py-5">
+
+
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <div class="card mb-4">
+                                        <div class="card-body text-center">
+                                            <img src="/user/images/profile-pic-male.svg" alt="avatar"
+                                                class="rounded-circle img-fluid" style="width: 150px;">
+                                            <h5 class="my-3">{{user.Name}}</h5>
+                                            {{!-- <p class="text-muted mb-1">Full Stack Developer</p>
+                                            <p class="text-muted mb-4">Bay Area, San Francisco, CA</p> --}}
+                                            <div class="d-flex justify-content-center mb-2">
+                                                {{!-- <button type="button" class="btn btn-primary">Follow</button> --}}
+                                                {{!-- <button type="button"
+                                                    class="btn btn-outline-primary ms-1">Message</button> --}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{>userprofileSideBar}}
+                                </div>
+                                <hr>
+                                <div class="col-lg-8 text-center" id="reload">
+                                    <div class="row">
+                                        <h2 style="font-weight: 500;">Manage Address</h2>
+                                        <div class="card col-lg-11 ml-5 text-left"
+                                            style="margin-top: 75px; border-radius:10px ;">
+                                            <div class="card-body">
+
+                                                <a class=" btn btn-warning" style="margin-bottom: 20px;"
+                                                    onclick="addaddress()" data-toggle="modal"><i
+                                                        class="fa fa-address-card-o" aria-hidden="true"></i> Add
+                                                    Adress</a>
+                                            </div>
+
+                                        </div>
+                                        {{#each address}}
+
+                                        <div class="card col-lg-11 ml-5 text-left"
+                                            style="background-color: white; border-radius:10px ; margin-top: 15px; padding-top: 20px;">
+                                            <div class="card-body">
+                                                <h4 class="card-title">{{this.address.name}}</h4>
+                                                <p class="card-text">
+                                                    {{this.address.address}},{{this.address.city}},{{this.address.country}}
+                                                </p>
+                                                <p class="card-text">{{this.address.email}},{{this.address.mobile}}</p>
+                                                <a class=" btn " style="margin-bottom: 20px;"
+                                                    onclick="showmodal('{{this.address._id}}')" data-toggle="modal"><i
+                                                        class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                                <a class=" btn " style="margin-bottom: 20px;"
+                                                    onclick="deleteAddress('{{this.address._id}}')"
+                                                    data-toggle="modal"><i class="fa fa-trash-o" aria-hidden="true"
+                                                        style="color: red;"></i></a>
+                                            </div>
+                                        </div>
+                                        {{!-- data-target="#exampleModalCenter" --}}
+
+                                        {{/each}}
+
+                                        <!-- Modal -->
+                                        <div class="modal fade text-left" id="exampleModalCenter" tabindex="-1"
+                                            role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle">Edit Address
+                                                        </h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+
+                                                        {{!-- <form onsubmit="return validate()"
+                                                            action="/updateUserData" method="post"> --}}
+
+                                                            <form onsubmit="return " id="editaddress">
+                                                                <input type="text" name="userid" value="{{user._id}}"
+                                                                    hidden>
+                                                                <input type="text" id="addressid" name="address_id"
+                                                                    value="" hidden>
+
+                                                                <div class="form-outline mb-4">
+                                                                    <label class="form-label"
+                                                                        for="form2Example1">Name</label>
+                                                                    <input type="text" id="name" class="form-control"
+                                                                        name="name" value="" />
+
+
+                                                                </div>
+                                                                <div class="form-outline mb-4">
+                                                                    <label class="form-label"
+                                                                        for="form2Example1">Mobile</label>
+                                                                    <input type="text" id="mobile" class="form-control"
+                                                                        name="mobile" value="" />
+
+
+                                                                </div>
+                                                                <div class="form-outline mb-4">
+                                                                    <label class="form-label"
+                                                                        for="form2Example1">Email</label>
+                                                                    <input type="text" id="email" class="form-control"
+                                                                        name="email" value="" />
+
+
+                                                                </div>
+
+                                                                <div class="form-outline mb-4">
+                                                                    <label class="form-label"
+                                                                        for="form2Example1">Address</label>
+                                                                    <input type="text" id="address" class="form-control"
+                                                                        name="address" value="" />
+
+
+                                                                </div>
+
+
+                                                                <div class="form-outline mb-4">
+                                                                    <label class="form-label"
+                                                                        for="form2Example1">City</label>
+                                                                    <input type="text" id="city" class="form-control"
+                                                                        name="city" value="" />
+
+
+                                                                </div>
+
+                                                                <div class="form-outline mb-4">
+                                                                    <label class="form-label"
+                                                                        for="form2Example1">Country</label>
+                                                                    <input type="text" id="country" class="form-control"
+                                                                        name="country" value="" />
+
+
+                                                                </div>
+
+                                                                <div class="form-outline mb-4">
+                                                                    <label class="form-label"
+                                                                        for="form2Example1">Pin</label>
+                                                                    <input type="text" id="pin" class="form-control"
+                                                                        name="pin" value="" />
+
+
+                                                                </div>
+
+
+
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Close</button>
+                                                        <button type="submit" id="apply" class="btn btn-primary">Save
+                                                            changes</button>
+                                                    </div>
+                                                    </form>
+                                                    <div class="">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        {{!-- modal --}}
+                                        {{!-- modal2 --}}
+                                        <div class="modal fade text-left" id="exam1" tabindex="-1" role="dialog"
+                                            aria-labelledby="exam1CenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exam1Title">Add New Address
+                                                        </h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+
+                                                        {{!-- <form onsubmit="return validate()"
+                                                            action="/updateUserData" method="post"> --}}
+
+                                                            <form id="addaddress">
+                                                                <input type="text" name="userid" value="{{user._id}}"
+                                                                    hidden>
+
+
+                                                                <div class="form-outline mb-4">
+                                                                    <label class="form-label"
+                                                                        for="form2Example1">Name</label>
+                                                                    <input type="text" class="form-control" name="name"
+                                                                        value="" />
+
+
+                                                                </div>
+                                                                <div class="form-outline mb-4">
+                                                                    <label class="form-label"
+                                                                        for="form2Example1">Mobile</label>
+                                                                    <input type="text" id="mobile" class="form-control"
+                                                                        name="mobile" value="" />
+
+
+                                                                </div>
+                                                                <div class="form-outline mb-4">
+                                                                    <label class="form-label"
+                                                                        for="form2Example1">Email</label>
+                                                                    <input type="text" id="email" class="form-control"
+                                                                        name="email" value="" />
+
+
+                                                                </div>
+
+                                                                <div class="form-outline mb-4">
+                                                                    <label class="form-label"
+                                                                        for="form2Example1">Address</label>
+                                                                    <input type="text" id="address" class="form-control"
+                                                                        name="address" />
+
+
+                                                                </div>
+
+
+                                                                <div class="form-outline mb-4">
+                                                                    <label class="form-label"
+                                                                        for="form2Example1">City</label>
+                                                                    <input type="text" id="city" class="form-control"
+                                                                        name="city" value="" />
+
+
+                                                                </div>
+
+                                                                <div class="form-outline mb-4">
+                                                                    <label class="form-label"
+                                                                        for="form2Example1">Country</label>
+                                                                    <input type="text" id="country" class="form-control"
+                                                                        name="country" value="" />
+
+
+                                                                </div>
+
+                                                                <div class="form-outline mb-4">
+                                                                    <label class="form-label"
+                                                                        for="form2Example1">Pin</label>
+                                                                    <input type="text" id="pin" class="form-control"
+                                                                        name="pin" />
+
+
+                                                                </div>
+
+
+
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">Close</button>
+                                                        <button type="submit" id="apply" class="btn btn-primary">Save
+                                                        </button>
+                                                    </div>
+                                                    </form>
+                                                    <div class="">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        {{!-- modal --}}
+
+
+                                    </div>
+                                    <br>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+
+                <!-- /product tab -->
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+
+    {{>userfooter}}
+    <!-- /FOOTER -->
+
+    <script src="/user/javascripts/editaddress.js"></script>
+
+    <script src="/user/javascripts/editaddressmodalUser.js"></script>
+
+    <script src="/user/javascripts/deleteaddressUser.js"></script>
+
+    <script src="/user/javascripts/addaddressUser.js"></script>
+    <script src="/user/javascripts/formvalidateupdate.js"></script>
+    <script src="/user/javascripts/jquery.min.js"></script>
+    <script src="/user/javascripts/bootstrap.min.js"></script>
+    <script src="/user/javascripts/slick.min.js"></script>
+    <script src="/user/javascripts/nouislider.min.js"></script>
+    <script src="/user/javascripts/jquery.zoom.min.js"></script>
+    <script src="/user/javascripts/main.js"></script>
+
+</body>
+
+</html>

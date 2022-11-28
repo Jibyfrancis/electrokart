@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    {{>header}}
+</head>
+
+{{>userheaders}}
+
+
+<div class="container " style="margin:auto; padding-left: 300px; padding-right: 300px;">
+
+    <div class="row ">
+        <div class="col-md ">
+            <h1>Sign up</h1>
+            <form onsubmit="return validate()" action="/signup" method="post">
+                {{#if errorMessage}}
+                <p style="color: red;">{{errorMessage}}</p>
+                {{/if}}
+                <div class="form-outline mb-4">
+                    <label class="form-label" for="form2Example1">Name</label>
+                    <input type="text" id="name" class="form-control" name="Name" />
+                    <span id="name-error" class="valerr"></span>
+
+                </div>
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                    <label class="form-label">Email address</label>
+                    <input type="email" id="email" class="form-control" name="Email" />
+
+                    <span id="email-error" class="valerr"></span>
+                </div>
+                <!-- mobile input -->
+                <div class="form-outline mb-4">
+                    <label class="form-label">Mobile</label>
+                    <input type="phone" id="mobile" class="form-control" name="mobile" />
+
+                    <span id="mobile-error" class="valerr"></span>
+                </div>
+
+                {{!-- referal --}}
+                 <div class="form-outline mb-4">
+                    <label class="form-label">Referal code</label>
+                    <input type="text" id="refered_By" class="form-control" name="referal" oninput="this.value = this.value.toUpperCase()"/>
+
+                    <span id="mobile-error" class="valerr"></span>
+                </div>
+
+
+                <!-- Password input -->
+                <div class="form-outline mb-4">
+                    <label class="form-label">Password</label>
+                    <input type="password" id="password" class="form-control" name="Password" />
+
+                    <span id="password-error" class="valerr"></span>
+                </div>
+                <!-- Password recheck -->
+                <div class="form-outline mb-4">
+                    <label class="form-label">Re-enter Password</label>
+                    <input oninput="validateRePassword()" type="password" id="repassword" class="form-control" />
+
+                    <span id="rePassword-error" class="valerr"></span>
+                </div>
+
+                <!-- Register buttons -->
+                <div class="text-center">
+                    <p><a href="/login">Already have an an account</a></p>
+                    <button type="submit" class="btn btn-danger btn-block mb-4">Sign up</button>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+<script src="/user/javascripts/formvalidate.js"></script>

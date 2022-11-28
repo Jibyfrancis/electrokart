@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   {{>header}}
+
+</head>
+
+{{>userheaders}}
+
+
+
+<body>
+
+
+    <!-- NAVIGATION -->
+
+    <!-- /NAVIGATION -->
+
+    <!-- BREADCRUMB -->
+
+    <!-- /BREADCRUMB -->
+
+    <!-- SECTION -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                
+                <div class="col-md col-md">
+                    <table class="table mt-5">
+                        {{#if wishlist.emptystatus}}
+                       <h2>Wishlist is empty</h2>
+                        {{else}}
+                       
+                                 
+                        <thead>
+                            <tr>
+                                <th scope="col">Product</th>
+                                <th scope="col">Details</th>
+                                <th scope=""></th>
+                                
+                        </thead>
+                        <tbody>
+                            {{#each wishlist}}
+                           
+                            <tr>
+                                <td> <a href="/product/{{this.wishlist._id}}"><img style="width:70px; height:70; "
+                                    src="/user/productimage/{{this.wishlist.images.[0]}}" alt="" > </td> </a>
+                                <td>{{this.wishlist.name}} <br>
+                                {{this.wishlist.description}} <br>Rs: {{this.wishlist.offerPrice}} </td>
+                                <td>
+                                    <a href="/delete-wishlist/{{this.product}}"> <i class="fa fa-trash-o" aria-hidden="true"></i></a>
+                                </td>
+                                
+                                         
+                            </tr>
+
+                           {{/each}}
+                        </tbody>
+                        
+                        {{/if}}
+                    </table>
+
+                </div>
+
+                <!-- /product tab -->
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /SECTION -->
+
+    <!-- Section -->
+
+    <!-- /Section -->
+
+    <!-- NEWSLETTER -->
+   
+    <!-- /NEWSLETTER -->
+
+    <!-- FOOTER -->
+   
+    {{>userfooter}}
+    <!-- /FOOTER -->
+
+    <!-- jQuery Plugins -->
+
+    
+
+    <script src="/user/javascripts/jquery.min.js"></script>
+    <script src="/user/javascripts/bootstrap.min.js"></script>
+    <script src="/user/javascripts/slick.min.js"></script>
+    <script src="/user/javascripts/nouislider.min.js"></script>
+    <script src="/user/javascripts/jquery.zoom.min.js"></script>
+    <script src="/user/javascripts/main.js"></script>
+
+</body>
+
+</html>

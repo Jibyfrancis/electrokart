@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   {{>header}}
+
+</head>
+
+{{>userheaders}}
+
+
+
+<body>
+
+
+    <!-- NAVIGATION -->
+
+    <!-- /NAVIGATION -->
+
+    <!-- BREADCRUMB -->
+
+    <!-- /BREADCRUMB -->
+
+    <!-- SECTION -->
+    <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                
+                <div class="col-md col-md">
+                    <table class="table mt-5">
+                                   
+                        <thead>
+                            <tr>
+                                 <th scope="col">Product</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Itme</th>
+                                <th scope="col">Payment</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Order Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each orders}}
+                           
+                            <tr>
+                                <td>{{this.cartitem.name}}</td>
+                                <td>{{this.amount}}</td>
+                                <td> <img style="width:70px; height:70; "
+                                        src="/user/productimage/{{this.cartitem.images.[0]}}" alt=""></td>
+                                <td>{{this.payment}}</td>
+                                <td>{{this.orderStatus}}</td>
+                                <td>{{this.orderDate}}</td>
+                                {{!-- <td>{{this.orderStatus}}</td> --}}
+                                {{#if this.cancelStatus}}
+
+                                {{else}}
+                                 {{#if this.deliveredStatus}}
+                                 <td><a href="/return/{{this._id}}/{{this.cartitem._id}}" class="btn btn-danger">Return</a></td>
+                                 {{else}}
+                                 <td><a href="/cancelOrder/{{this._id}}/{{this.cartitem._id}}" class="btn btn-danger">CancelOrder</a></td>
+                                {{/if}}
+                              
+                                {{/if}}
+
+             
+
+                            </tr>
+
+                           {{/each}}
+                        </tbody>
+                       
+                    </table>
+
+                </div>
+
+                <!-- /product tab -->
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /SECTION -->
+
+    <!-- Section -->
+
+    <!-- /Section -->
+
+    <!-- NEWSLETTER -->
+   
+    <!-- /NEWSLETTER -->
+
+    <!-- FOOTER -->
+   
+    {{>userfooter}}
+    <!-- /FOOTER -->
+
+    <!-- jQuery Plugins -->
+
+    
+
+    <script src="/user/javascripts/jquery.min.js"></script>
+    <script src="/user/javascripts/bootstrap.min.js"></script>
+    <script src="/user/javascripts/slick.min.js"></script>
+    <script src="/user/javascripts/nouislider.min.js"></script>
+    <script src="/user/javascripts/jquery.zoom.min.js"></script>
+    <script src="/user/javascripts/main.js"></script>
+
+</body>
+
+</html>
