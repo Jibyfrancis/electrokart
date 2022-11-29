@@ -10,7 +10,7 @@ const { home,
     userProfile,
     editUserData,
     product,
-    categoty,
+    category,
     addtocart,
     cart,
     changeQuantity,
@@ -41,9 +41,9 @@ const { home,
     applyCoupon,
     logout } = require("../controller/usercontroller");
 var router = express.Router();
-const userController = require('../controller/usercontroller');
+
 const userAuth = require("../midleware/authentication");
-const { post, route } = require("./admin");
+
 
 
 
@@ -66,7 +66,7 @@ router.route("/updateUserData").post(userAuth, editUserData)
 
 router.route("/product/:id").get(product)
 
-router.route("/products/:categoty").get(categoty)
+router.route("/products/:category").get(category)
 
 router.route("/addToCart/:id").get(addtocart)
 

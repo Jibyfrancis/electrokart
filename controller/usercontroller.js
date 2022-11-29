@@ -27,7 +27,7 @@ module.exports = {
         console.log("loginrender");
         var cat = await categoryHelpers.getCategory();
         var products = await productHelpers.getProduct();
-        req.session.categoty = cat;
+        req.session.category = cat;
         if (req.session.loggedIn) {
             var getcount = await userHelpers.getCartCount(req.session.user._id);
             var getwishcount = await userHelpers.getWishlistCount(req.session.user._id);
@@ -106,7 +106,7 @@ module.exports = {
 
     otpLogin: (async(req, res) => {
         var cat = await categoryHelpers.getCategory();
-        res.render("user/otp-login", { cat,numError: req.session.numErr });
+        res.render("user/otp-login", {cat,numError: req.session.numErr });
         req.session.numErr = false;
     }),
 
@@ -160,7 +160,7 @@ module.exports = {
             });
     }),
     userProfile: (async (req, res) => {
-        let cat = req.session.categoty;
+        let cat = req.session.category;
         console.log(req.session.user);
         let user = req.session.user;
 
@@ -192,7 +192,7 @@ module.exports = {
             });
     }),
     product: (async (req, res) => {
-        let cat = req.session.categoty;
+        let cat = req.session.category;
         req.session.returnToUrl = req.originalUrl;
         if (req.session.loggedIn) {
             let user = req.session.user;
@@ -238,11 +238,11 @@ module.exports = {
         }
     }),
 
-    categoty: (async (req, res) => {
+    category: (async (req, res) => {
         var product = await productHelpers.getProductWithCategory(
-            req.params.categoty
+            req.params.category
         );
-        let cat = req.session.categoty;
+        let cat = req.session.category;
         let user = req.session.user;
         if (req.session.loggedIn) {
             var getcount = await userHelpers.getCartCount(req.session.user._id);
@@ -258,9 +258,7 @@ module.exports = {
                 console.log(element);
             });
         }
-        console.log(product);
-
-        console.log(req.params.categoty);
+    
         res.render("user/categorywise", { product, user, getcount, cat, getwishcount });
     }),
 
@@ -276,7 +274,7 @@ module.exports = {
         }
     }),
     cart: (async (req, res) => {
-        let cat = req.session.categoty;
+        let cat = req.session.category;
         let getcount = await userHelpers.getCartCount(req.session.user._id);
         var getwishcount = await userHelpers.getWishlistCount(req.session.user._id);
         // req.session.count=getcount
@@ -371,7 +369,7 @@ module.exports = {
     }),
     proceed: (async (req, res) => {
         console.log(req.query.id);
-        let cat = req.session.categoty;
+        let cat = req.session.category;
         // req.session.count=getcount
         if (req.session.loggedIn) {
             let user = req.session.user;
@@ -420,7 +418,6 @@ module.exports = {
             });
         }
     }),
-
     defaultAddress: (async (req, res) => {
         if (req.session.loggedIn) {
             let address = await orderHelper.defaultAddress(req.body.select);
@@ -430,7 +427,6 @@ module.exports = {
             res.redirect("/checkout");
         }
     }),
-
     newAddress: (async (req, res) => {
         if (req.session.loggedIn) {
             let address = await orderHelper.defaultAddress(req.body.select);
@@ -450,11 +446,13 @@ module.exports = {
     }),
 
     manageAddress: (async (req, res) => {
-        let cat = await categoryHelpers.getCategory();
         let address = await orderHelper.getAddress(req.session.user._id);
         let user = req.session.user;
+        var cat = await categoryHelpers.getCategory();
+        var getcount = await userHelpers.getCartCount(req.session.user._id);
+        var getwishcount = await userHelpers.getWishlistCount(req.session.user._id);
         console.log(address);
-        res.render("user/manage-address", { cat,address, user });
+        res.render("user/manage-address", {cat,getcount,getwishcount, address, user });
     }),
 
     displyAdderss: ((req, res) => {
@@ -475,6 +473,7 @@ module.exports = {
             });
     }),
 
+    
     addAddress: ((req, res) => {
         let user = {
             userid: req.session.user._id,
@@ -484,7 +483,7 @@ module.exports = {
         });
     }),
     checkout: (async (req, res) => {
-        let cat = req.session.categoty;
+        let cat = req.session.category;
         if (req.session.loggedIn) {
             let getcount = await userHelpers.getCartCount(req.session.user._id);
             var getwishcount = await userHelpers.getWishlistCount(req.session.user._id);
@@ -697,7 +696,7 @@ module.exports = {
     }),
 
     orderSuccess:(async (req, res) => {
-        let cat = req.session.categoty;
+        let cat = req.session.category;
         console.log("successpage");
         if (req.session.loggedIn) {
             const payerId = req.query.payerID;
@@ -712,7 +711,7 @@ module.exports = {
         }
     }),
     orders:(async (req, res) => {
-        let cat = req.session.categoty;
+        let cat = req.session.category;
         if (req.session.loggedIn) {
             let user = req.session.user;
             orderHelper.deletePendingPayment(req.session.user._id);

@@ -184,6 +184,7 @@ module.exports = {
         });
     });
   },
+
   editUserDetails: (user) => {
     return new Promise(async (resolve, reject) => {
       console.log(user);
@@ -220,6 +221,7 @@ module.exports = {
         });
     });
   },
+  
   findUser: (user) => {
     return new Promise(async (resolve, reject) => {
       let userData = await db
