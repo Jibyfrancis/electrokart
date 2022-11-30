@@ -48,17 +48,19 @@
         <div class="container">
             <!-- row -->
             <div class="row">
-
+                
                 <!-- section title -->
                 <div class="col-md-12">
                     <div class="section-title">
                         <h3 class="title">New Products</h3>
                         <div class="section-nav">
-                            <ul class="section-tab-nav tab-nav" id="myUL">
-                                <li class="active"><a data-toggle="tab" href="#tab1">Laptops</a></li>
-                                <li><a data-toggle="tab" href="#tab1">Smartphones</a></li>
+                            <ul class="section-tab-nav tab-nav" id="myUL"> 
+                                {{#each cat}}
+                                <li class=""><a data-toggle="tab" href="/products/{{this.category}}">{{this.category}}</a></li>
+                                {{!-- <li><a data-toggle="tab" href="#tab1">Smartphones</a></li>
                                 <li><a data-toggle="tab" href="#tab1">Cameras</a></li>
-                                <li><a data-toggle="tab" href="#tab1">Accessories</a></li>
+                                <li><a data-toggle="tab" href="#tab1">Accessories</a></li> --}}
+                                {{/each}}
                             </ul>
                         </div>
                     </div>
@@ -76,20 +78,22 @@
                                     <!-- product -->
                                     {{#each products}}
                                     <!-- product -->
-
-                                    <div class="product">
+    
+                                    <div class="product" >
+                                    <a href="/product/{{this._id}}">
                                         <div class="product-img" style="">
                                             <img src="/user/productimage/{{this.images.[0]}}" style="height: 250px; width: auto;" alt="">
                                             <div class="product-label">
                                                 {{#if this.categoryOffer}}
                                                 <span class="sale">{{this.categoryOffer}}%</span>
                                                 <span class="new">NEW</span>
-                                                {{/if}}
+                                                {{/if}} 
                                             </div>
                                         </div>
+                                    </a>
                                         <div class="product-body">
                                             <p class="product-category">{{this.category}}</p>
-                                            <h3 class="product-name"><a href="/product/{{this._id}}">{{this.name}}</a>
+                                            <h3 class="product-name">{{this.name}}
                                             </h3>
                                             <h4 class="product-price">{{this.offerPrice}} <del
                                                     class="product-old-price">{{this.price}}</del></h4>

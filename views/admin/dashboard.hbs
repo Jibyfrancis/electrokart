@@ -27,7 +27,11 @@
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href="/admin/stylesheets/bootstrap.min.css" rel="stylesheet">
-
+<style>
+    body{
+        background-color: rgb(238, 238, 238);
+    }
+</style>
     <!-- Template Stylesheet -->
     <link href="/admin/stylesheets/style.css" rel="stylesheet">
 </head>
@@ -123,7 +127,7 @@
                     <div class="col-sm-12 col-xl-4">
                         <div class="bg-secondary text-center rounded p-4">
                             <div class="d-flex align-items-center justify-content-between mb-4">
-                                <h6 class="mb-0">Daily Sale</h6>
+                                <h6 class="mb-0">Sale</h6>
                                 {{!-- <a href="">Show All</a> --}}
                             </div>
                             <canvas id="two"></canvas>
@@ -174,7 +178,7 @@
                                     <td>{{this.name}}</td>
                                     <td>{{this.amount}}</td>
                                     <td>{{this.paymentStatus}}</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                    <td><a class="btn btn-sm btn-primary" href="/admin/vieworder/{{this._id}}">Detail</a></td>
                                 </tr>
                                 {{/each}}
                                 

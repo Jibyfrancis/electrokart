@@ -115,15 +115,9 @@ module.exports = {
         number.mobile = parseInt(req.body.phonenumber);
         console.log(number.mobile);
         userHelpers.doOtp(req.body.phonenumber).then((response) => {
-            console.log(response);
+            
             if (response) {
                 req.session.user = response;
-
-                console.log(client);
-                console.log(serviceID)
-                console.log(accountSID)
-                console.log(authToken);
-
                 req.session.phonenumber = req.body.phonenumber;
                 client.verify
                     .services(serviceID)
@@ -159,6 +153,7 @@ module.exports = {
                 res.redirect("/");
             });
     }),
+
     userProfile: (async (req, res) => {
         let cat = req.session.category;
         console.log(req.session.user);
@@ -180,6 +175,7 @@ module.exports = {
             req.session.error = null;
         }
     }),
+
     editUserData: (async (req, res) => {
         userHelpers
             .editUserDetails(req.body)
@@ -191,6 +187,7 @@ module.exports = {
                 res.json({ response, err });
             });
     }),
+
     product: (async (req, res) => {
         let cat = req.session.category;
         req.session.returnToUrl = req.originalUrl;
@@ -244,22 +241,30 @@ module.exports = {
         );
         let cat = req.session.category;
         let user = req.session.user;
+       
         if (req.session.loggedIn) {
+            var product = await productHelpers.getProductWithCategory(
+                req.params.category
+            );
             var getcount = await userHelpers.getCartCount(req.session.user._id);
             var getwishcount = await userHelpers.getWishlistCount(req.session.user._id);
 
             product.forEach((element) => {
                 userHelpers.findWishList(element._id, user._id).then((wishlist) => {
-                    if (wishlist.status === true) {
-                        element.iswhislist = true;
+                   
+                    if (wishlist.status == true) {
+                        element.iswhislist=true;
+                        
                     }
-                    console.log(wishlist);
+                    res.render("user/categorywise", { product, user, getcount, cat, getwishcount });
                 });
-                console.log(element);
+                
             });
+            
+        }else{
+
+            res.render("user/categorywise", { product, user, getcount, cat, getwishcount });
         }
-    
-        res.render("user/categorywise", { product, user, getcount, cat, getwishcount });
     }),
 
     addtocart: ((req, res) => {
@@ -482,6 +487,7 @@ module.exports = {
             res.json(response);
         });
     }),
+
     checkout: (async (req, res) => {
         let cat = req.session.category;
         if (req.session.loggedIn) {
@@ -520,7 +526,6 @@ module.exports = {
                     cartTotal.total =
                         cartTotal.total - (cartTotal.total * coupon.percentage) / 100;
                 }
-
             }
             else {
                 req.session.coupon = null;
@@ -537,8 +542,8 @@ module.exports = {
             });
         }
     }),
+
     postCheckout: (async (req, res) => {
-        console.log(req.body);
         if (req.session.loggedIn) {
             formData = req.body;
             addAddress = req.session.addAddress;
@@ -546,27 +551,16 @@ module.exports = {
             let products = await userHelpers.getCartProduct(req.session.user._id);
             // let cartTotal = await userHelpers.getTotalAmount(req.session.user._id);
             let cartTotal = parseInt(formData.total);
-            console.log("carttotal");
-            console.log(cartTotal);
-            console.log(products);
 
             orderHelper.createAddress(addAddress[0].address, formData);
-            console.log("coupon check");
-            console.log(req.session.coupon);
             if (req.session.coupon) {
-                console.log("couponfound");
                 req.session.coupon = products[0].coupon;
                 let coupon = await couponHelper.findCouponId(req.session.coupon);
                 let maxDiscount = cartTotal - (cartTotal * coupon.percentage) / 100;
                 let limitAmount = Math.round(cartTotal * coupon.percentage) / 100;
-                console.log(maxDiscount);
-                console.log(limitAmount);
-
+               
                 if (maxDiscount > coupon.maxAmount && limitAmount > coupon.maxAmount) {
-                    console.log('coupondisccccccccccccccccccccc');
-                    // cartTotal = cartTotal -coupon.maxAmount
-                    console.log(products.length);
-
+                    
                     for (i = 0; i < products.length; i++) {
                         products[i].total = (products[i].total - (coupon.maxAmount / products.length));
 
@@ -577,16 +571,12 @@ module.exports = {
                         products[i].total = products[i].total - (products[i].total * coupon.percentage) / 100;
 
                     }
-                    // cartTotal = cartTotal - (cartTotal * coupon.percentage) / 100;
-
-
+            
                 }
 
                 userHelper.insertcoupon(req.session.coupon, req.session.user._id);
             }
-            console.log('pppppppppppppppppppppp');
-            console.log(products);
-
+           
             orderHelper
                 .createOrder(formData, order, products, cartTotal)
                 .then((orderId) => {
@@ -598,8 +588,7 @@ module.exports = {
                         res.json({ codSuccess: true });
                     } else if (formData.payment === "Razorpay") {
                         userHelper.generateRazorpay(orderId, cartTotal).then((response) => {
-                            console.log("razorpayyyyyyyy");
-                            console.log(response);
+                          
                             response.razorpay = true;
                             response.user = req.session.user;
                             res.json(response);
@@ -630,6 +619,7 @@ module.exports = {
                 });
         }
     }),
+
     razorpayVeryfyPaymrnt:((req, res) => {
         console.log("ajaxcall");
         console.log(req.body);
@@ -697,7 +687,7 @@ module.exports = {
 
     orderSuccess:(async (req, res) => {
         let cat = req.session.category;
-        console.log("successpage");
+       
         if (req.session.loggedIn) {
             const payerId = req.query.payerID;
             const paymentId = req.query.paymentId;
@@ -706,16 +696,27 @@ module.exports = {
             cartHelper.deleteCart(user._id);
             var getcount = await userHelpers.getCartCount(req.session.user._id);
             var getwishcount = await userHelpers.getWishlistCount(req.session.user._id);
-            console.log("ajaxcall");
+           
             res.render("user/order-success", { user, getcount, cat, getwishcount });
         }
     }),
     orders:(async (req, res) => {
+     
+       var pageno=req.query.page
+        if (!pageno){
+            pageno=1
+
+        }
         let cat = req.session.category;
         if (req.session.loggedIn) {
             let user = req.session.user;
-            orderHelper.deletePendingPayment(req.session.user._id);
-            let orders = await orderHelper.getAllOrders(req.session.user._id);
+            let pagenum = req.pag
+            let nextpage=res.next
+            let prevpage = res.prevpage
+            let orders = req.order
+            
+            // orderHelper.deletePendingPayment(req.session.user._id);
+            // let orders = await orderHelper.getAllOrders(req.session.user._id);
             var getcount = await userHelpers.getCartCount(req.session.user._id);
             var getwishcount = await userHelpers.getWishlistCount(req.session.user._id);
             orders.forEach((orders) => {
@@ -728,20 +729,22 @@ module.exports = {
                 if (orders.orderStatus === "Refund Approved") {
                     orders.refundStatus = "true";
                 }
-                console.log(orders);
+              
             });
-            console.log(orders);
-            res.render("user/orders", { orders, user, getcount, cat, getwishcount });
+        
+            res.render("user/orders", {pagenum,nextpage,prevpage, orders, user, getcount, cat, getwishcount,pageno });
         }
     }),
 
     cancelOrder:(async (req, res) => {
         console.log(req.params);
-        orderHelper.cancelOrder(req.params.id, req.params.pid).then(() => {
+        let user = req.session.user._id
+        orderHelper.cancelOrder(req.params.id, req.params.pid,req.params.amount,user).then(() => {
             console.log();
             res.redirect("/orders");
         });
     }),
+
     returnOrder:(async (req, res) => {
         console.log(req.params);
         orderHelper.returnOrder(req.params.id, req.params.pid).then(() => {

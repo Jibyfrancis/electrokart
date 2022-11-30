@@ -77,7 +77,7 @@
               {
                 label: "India",
                 data: res.no,
-                backgroundColor: "green",
+                backgroundColor: "rgba(0, 235, 0, .6)",
               },
               // {
               //     label: "UK",
@@ -135,9 +135,9 @@
                   {
                     backgroundColor: [
                       "rgba(235, 22, 22, .7)",
-                      "rgba(235, 22, 22, .6)",
-                      "rgba(235, 22, 22, .5)",
-                      // "rgba(235, 22, 22, .4)",
+                      "rgba(0, 235, 0, .6)",
+                      "rgba(0, 0, 235, .5)",
+                      "rgba(0, 22, 235, .4)",
                       // "rgba(235, 22, 22, .3)"
                     ],
                     data: res.no,

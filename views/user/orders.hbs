@@ -66,13 +66,16 @@
                                 <td>{{this.productTotal}}</td>
                                 <td>{{this.payment}}</td>
                                 <td>{{this.orderDate}}</td>
-                                <td style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; color: rgb(224, 38, 38);" >{{this.orderStatus}}</td>
+                                <td
+                                    style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; color: rgb(224, 38, 38);">
+                                    {{this.orderStatus}}</td>
                                 <td>
-                                     <h4 class="card-title">{{this.deliveryAddress.name}}</h4>
+                                    <h4 class="card-title">{{this.deliveryAddress.name}}</h4>
                                     <p class="card-text">
-                                {{this.deliveryAddress.address}},{{this.deliveryAddress.city}},{{this.deliveryAddress.country}}{{this.deliveryAddress.pin}}
-                            </p>
-                            <p class="card-text">{{this.deliveryAddress.mobile}}{{this.deliveryAddress.email}}</p>
+                                        {{this.deliveryAddress.address}},{{this.deliveryAddress.city}},{{this.deliveryAddress.country}}{{this.deliveryAddress.pin}}
+                                    </p>
+                                    <p class="card-text">{{this.deliveryAddress.mobile}}{{this.deliveryAddress.email}}
+                                    </p>
                                 </td>
 
                                 <td>{{this._id}}</td>
@@ -93,14 +96,14 @@
                                 <td><a href="/returnOrder/{{this._id}}/{{this.cartitem._id}}" class="btn btn-danger"
                                         style="width:120px ;">Return</a></td>
                                 {{else}}
-                                
+
                                 {{#if_Neq this.orderStatus 'Shipped'}}
                                 {{#if_Neq this.orderStatus 'Returned'}}
                                 {{#if_Neq this.orderStatus 'Refund Approved'}}
-                                 {{#if_Neq this.orderStatus 'Cancelled'}}
-                                
-                                <td><a href="/cancelOrder/{{this._id}}/{{this.cartitem._id}}" class="btn btn-danger"
-                                        style="width:120px ;">CancelOrder</a></td>
+                                {{#if_Neq this.orderStatus 'Cancelled'}}
+
+                                <td><a href="/cancelOrder/{{this._id}}/{{this.cartitem._id}}/{{this.productTotal}}"
+                                        class="btn btn-danger" style="width:120px ;">CancelOrder</a></td>
 
 
                                 {{/if_Neq}}
@@ -134,6 +137,28 @@
 
                 <!-- /product tab -->
             </div>
+
+
+            <nav aria-label="Page navigation example">
+
+                <ul class="pagination justify-content-center " style="float: right;">
+                    <li class="page-item ">
+                        <a class="page-link" href="/orders?page={{prevpage.page}}" style="color: #d43f3a;">Previous</a>
+                    </li>
+                    {{#each pagenum }}
+                    {{#if_eq this.page ../pageno}}
+                    <li class="page-item "><a class="page-link" style="background-color: #d43f3a; color: white;"
+                            href="/orders?page={{this.page}}">{{this.page}}</a></li>
+                    {{else}}
+                    <li class="page-item"><a class="page-link" style="color: black;" href="/orders?page={{this.page}}">{{this.page}}</a></li>
+                    {{/if_eq}}
+                    {{/each}}
+                    <li class="page-item">
+                        <a class="page-link" href="/orders?page={{nextpage.page}}" style="color: #d43f3a;">Next</a>
+                    </li>
+                </ul>
+            </nav>
+
             <!-- /row -->
         </div>
         <!-- /container -->
@@ -151,18 +176,19 @@
     <!-- FOOTER -->
 
     {{>userfooter}}
-    
+
     <!-- /FOOTER -->
 
+
     <!-- jQuery Plugins -->
-   
+
     <script src="/user/javascripts/jquery.min.js"></script>
     <script src="/user/javascripts/bootstrap.min.js"></script>
     <script src="/user/javascripts/slick.min.js"></script>
     <script src="/user/javascripts/nouislider.min.js"></script>
     <script src="/user/javascripts/jquery.zoom.min.js"></script>
     <script src="/user/javascripts/main.js"></script>
-   
+
 
 </body>
 

@@ -43,6 +43,7 @@ const { home,
 var router = express.Router();
 
 const userAuth = require("../midleware/authentication");
+const pagination=require('../midleware/pagination')
 
 
 
@@ -115,9 +116,9 @@ router.route("/payment-failed").get(paymentfailed)
 
 router.route("/ordersuccess").get(userAuth, orderSuccess)
 
-router.route("/orders").get(userAuth, orders)
+router.route("/orders").get(userAuth,pagination.pagination,orders )
 
-router.route("/cancelOrder/:id/:pid").get(userAuth, cancelOrder)
+router.route("/cancelOrder/:id/:pid/:amount").get(userAuth, cancelOrder)
 
 router.route("/returnOrder/:id/:pid").get(userAuth, returnOrder)
 

@@ -221,7 +221,7 @@ module.exports = {
         });
     });
   },
-  
+
   findUser: (user) => {
     return new Promise(async (resolve, reject) => {
       let userData = await db
@@ -396,7 +396,7 @@ module.exports = {
         if(wish){
             count=wish.products.length
         }
-        console.log(count);
+        
         resolve(count)
     })
 

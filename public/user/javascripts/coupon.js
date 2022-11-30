@@ -1,7 +1,6 @@
 function coupon(){
     let coupon=document.getElementById('code').value
     let error1=document.getElementById('error')
-    alert(coupon)
     $.ajax({
         url:'/apply-coupon',
         data:{
