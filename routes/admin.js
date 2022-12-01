@@ -35,64 +35,83 @@ const { home,
     deleteCoupon,
     logout, 
     editCategory} = require("../controller/admincontroller");
-router.route('/').get(home)
 
-router.route("/graphdata").get(graphdata1)
+const loginCheck=(req,res,next)=>{
+    if(req.session.adminLoggedIn){
+        next()
+    }else{
+        res.redirect("/admin/admlogin")
+    }
+}
+const verify =(req,res,next)=>{
+    if(req.session.adminLoggedIn){
+        res.redirect('/admin')
+    }else{
+        next()
+    }
 
-router.route("/graphdata2").get(graphdata2)
+}
 
-router.route("/graphdata3").get(graphdata3)
 
-router.route("/admlogin").get(login)
+
+router.route('/').get(loginCheck,home)
+
+router.route("/graphdata").get(loginCheck,graphdata1)
+
+router.route("/graphdata2").get(loginCheck,graphdata2)
+
+router.route("/graphdata3").get(loginCheck,graphdata3)
+
+router.route("/admlogin").get(verify,login)
     .post(postLogin)
-router.route("/users").get(user)
+router.route("/users").get(loginCheck,user)
 
-router.route("/blockUser/:id").get(blockUser)
+router.route("/blockUser/:id").get(loginCheck,blockUser)
 
-router.route("/unblockUser/:id").get(unblockUser)
+router.route("/unblockUser/:id").get(loginCheck,unblockUser)
 
-router.route("/product").get(product)
+router.route("/product").get(loginCheck,product)
 
-router.route("/addProduct").get(addProduct)
+router.route("/addProduct").get(loginCheck,addProduct)
     .post(upload.array("image", 4), addproductPost)
 
-router.route("/editProduct/:id").get(editProduct)
+router.route("/editProduct/:id").get(loginCheck,editProduct)
 
 router.route("/updateProduct/:id").post( upload.array("image", 4), updateProduct)
 
-router.route("/deleteProduct/:id").get(deleteProduct)
+router.route("/deleteProduct/:id").get(loginCheck,deleteProduct)
 
-router.route("/category").get(category)
+router.route("/category").get(loginCheck,category)
 
-router.route("/addCategory").get(addcategory)
+router.route("/addCategory").get(loginCheck,addcategory)
     .post(upload.array("image", 1),addcategoryPost)
 
-router.route("/editCatogory/:id").get(editCategory)
+router.route("/editCatogory/:id").get(loginCheck,editCategory)
 
 router.route("/updateCategory/:id").post(upload.array("image", 1), updateCategory)
 
-router.route("/deleteCategory/:id").get(deleteCategory)
+router.route("/deleteCategory/:id").get(loginCheck,deleteCategory)
 
-router.route("/orders").get(orders)
+router.route("/orders").get(loginCheck,orders)
 
-router.route("/vieworder/:id").get(viewOreders)
+router.route("/vieworder/:id").get(loginCheck,viewOreders)
 
-router.route("/orderstatus").post(orderStatus)
+router.route("/orderstatus").post(loginCheck,orderStatus)
 
-router.route("/salereport").get(salesReport)
+router.route("/salereport").get(loginCheck,salesReport)
 
-router.route("/select-by-date").get(selectByDate)
+router.route("/select-by-date").get(loginCheck,selectByDate)
 
-router.route("/select-by-month").get(selectByMonth)
+router.route("/select-by-month").get(loginCheck,selectByMonth)
 
-router.route("/select-by-year").get(selectByYear)
+router.route("/select-by-year").get(loginCheck,selectByYear)
 
-router.route("/coupon").get(coupon)
+router.route("/coupon").get(loginCheck,coupon)
 
-router.route("/addcoupon").get(addCoupon)
+router.route("/addcoupon").get(loginCheck,addCoupon)
     .post(addCouponPost)
 
-router.route("/deleteCoupon/:id").get(deleteCoupon)
+router.route("/deleteCoupon/:id").get(loginCheck,deleteCoupon)
 
 router.route('/logout').get(logout)
 

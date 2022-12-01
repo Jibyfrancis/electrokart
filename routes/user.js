@@ -81,7 +81,7 @@ router.route("/addto-wishlist/:id").get(userAuth, addtoWishlist)
 
 router.route("/view-wishlist").get(userAuth, viewWishlist)
 
-router.route("/delete-wishlist/:id").get(deletewishlist)
+router.route("/delete-wishlist/:id").get(userAuth,deletewishlist)
 
 router.route("/removewishlist/:id").get(userAuth, removeWishlist)
 
@@ -95,9 +95,9 @@ router.route("/edit-address").post(editAddress)
 
 router.route("/manage-address").get(userAuth,manageAddress)
 
-router.route("/display-address").get(displyAdderss)
+router.route("/display-address").get(userAuth,displyAdderss)
 
-router.route("/delete-address/:id").delete(deleteAddress)
+router.route("/delete-address/:id").get(userAuth,deleteAddress)
 
 router.route("/add-address").post(addAddress)
 
@@ -108,11 +108,13 @@ router.route("/checkout").get(userAuth, checkout)
 
 router.route("/verifypayment").post(razorpayVeryfyPaymrnt)
 
-router.route("/ordersuccess-paypal").get(orderSuccessPaypal)
+router.route("/ordersuccess-paypal").get(userAuth,orderSuccessPaypal)
 
-router.route("/cancel-paypal").get(cancelPaypal)
+router.route("/cancel-paypal").get(userAuth,cancelPaypal)
 
-router.route("/payment-failed").get(paymentfailed)
+router.route("/payment-failed").get(userAuth,paymentfailed)
+
+//orders
 
 router.route("/ordersuccess").get(userAuth, orderSuccess)
 

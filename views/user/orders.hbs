@@ -29,24 +29,16 @@
             <div class="card">
                 {{!-- <a href="/orderhistory" class="btn btn-danger " style="margin-left: 65em;"> Order History</a> --}}
                 <div class="col-md col-md">
-                    <table class="table mt-5 fixed" id="table1">
-                        {{#each orders}}
+                    <table class="table mt-5 fixed" >
 
                         <thead>
-                            {{!--
-                            <col width="20px" />
-                            <col width="20px" />
-                            <col width="20px" />
-                            <col width="20px" />
-                            <col width="20px" />
-                            <col width="20px" />
-                            <col width="20px" /> --}}
+                           
                             <tr>
                                 {{!-- <th scope="col">Order ID</th> --}}
                                 <th scope="col">Item</th>
                                 <th scope="col">Amount</th>
 
-                                <th scope="col">Payment</th>
+                                {{!-- <th scope="col">Payment</th> --}}
                                 <th scope="col">Order Date</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">Address</th>
@@ -57,14 +49,15 @@
 
                             </tr>
                         </thead>
+                        {{#each orders}}
                         <tbody>
 
 
                             <tr>
                                 <td> <img style="width:70px; height:70; "
                                         src="/user/productimage/{{this.cartitem.images.[0]}}" alt=""></td>
-                                <td>{{this.productTotal}}</td>
-                                <td>{{this.payment}}</td>
+                                <td>{{this.productTotal}} <br>{{this.payment}}</td>
+                                {{!-- <td>{{this.payment}}</td> --}}
                                 <td>{{this.orderDate}}</td>
                                 <td
                                     style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; color: rgb(224, 38, 38);">

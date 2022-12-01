@@ -705,8 +705,8 @@ module.exports = {
           payment_method: "paypal",
         },
         redirect_urls: {
-          return_url: "http://localhost:3000/ordersuccess-paypal",
-          cancel_url: "http://localhost:3000/cancel-paypal",
+          return_url: "http://electrokart.tk/ordersuccess-paypal",
+          cancel_url: "http://electrokart.tk/cancel-paypal",
         },
         transactions: [
           {

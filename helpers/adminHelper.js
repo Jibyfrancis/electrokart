@@ -1,7 +1,6 @@
 var db = require("../config/connections");
 var collection = require("../config/collections");
 const bcrypt = require("bcrypt");
-const { response } = require("express");
 const { PRODUCT_COLLECTION } = require("../config/collections");
 const {
   MonthlyInstance,

@@ -53,6 +53,8 @@
                 opacity: 1;
             }
         }
+      
+
     </style>
 </head>
 
@@ -86,7 +88,7 @@
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="card mb-4">
-                                        <div class="card-body text-center">
+                                        <div class="card-body text-center" style="margin-top: 15px;">
                                             <img src="/user/images/profile-pic-male.svg" alt="avatar"
                                                 class="rounded-circle img-fluid" style="width: 150px;">
                                             <h5 class="my-3">{{user.Name}}</h5>
@@ -119,7 +121,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 ml-5" style="margin-left: 260px;">
+                                        <div class="col-lg-3 ml-5" style="margin-left: 200px;">
                                             <div class="card"
                                                 style="margin-top: 75px; border-radius:10px ; width: 300px; height: 75px; background-color: rgb(250, 212, 212);">
                                                 <div class="card-head"
@@ -133,30 +135,69 @@
                                             </div>
                                         </div>
                                     </div>
-                                        {{#each wallet}}
 
-                                        <div class="card col-lg-10 ml-5 text-left"
-                                            style="background-color: white; border-radius:10px ; margin-top: 15px;">
-                                            <div class="card-body">
-                                              
-                                                <p class="card-text">
-                                                    {{this.history.type}},{{this.history.payment }}
-                                                </p>
-                                                {{#if this.history.refundAmount }}
-                                                <p class="card-text" style="color: green;">
-                                                    Refund :+ {{this.history.refundAmount}}
-                                                </p>
-                                                {{else}}
-                                                <p class="card-text" style="color: red;">
-                                                    Purchse : -{{this.history.purchseAmount}}
-                                                </p>
-                                                {{/if}}
-                                                 
+                                    <div class="card col-lg-10 ml-5 text-left"
+                                        style="background-color: white; border-radius:5px ; margin-top: 15px;">
+                                        {{!-- <div class="card-body">
 
-                                            </div>
-                                        </div>
-                                        {{/each}}
+                                            <p class="card-text">
+                                                {{this.history.type}},{{this.history.payment }}
+                                            </p>
+                                            {{#if this.history.refundAmount }}
+                                            <p class="card-text" style="color: green;">
+                                                Refund :+ {{this.history.refundAmount}}
+                                            </p>
+                                            {{else}}
+                                            <p class="card-text" style="color: red;">
+                                                Purchse : -{{this.history.purchseAmount}}
+                                            </p>
+                                            {{/if}}
+
+
+                                        </div> --}}
+                                        <table class="table mt-5 fixed">
+
+                                            <thead>
+
+                                                <tr>
+
+                                                    <th scope="col">Type</th>
+                                                    <th scope="col">Amount</th>
+
+                                                    {{!-- <th scope="col">Order Date</th> --}}
+
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                            {{#each wallet}}
+                                                <tr>
+                                                    <td> {{this.history.type}}</td>
+                                                    <td> {{#if this.history.refundAmount }}
+                                                        <p class="card-text" style="color: green;">
+                                                            Refund :+ {{this.history.refundAmount}}
+                                                        </p>
+                                                        {{else}}
+                                                        <p class="card-text" style="color: red;">
+                                                            Purchse : -{{this.history.purchseAmount}}
+                                                        </p>
+                                                        {{/if}}
+
+                                                    </td>
+
+                                                    {{!-- <td>{{this.history.payment }}</td> --}}
+
+
+                                                </tr>
+                                            {{/each}}
+
+
+                                            </tbody>
+
+
+                                        </table>
                                     </div>
+                                </div>
 
                     </section>
 
